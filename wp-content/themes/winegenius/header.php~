@@ -1,0 +1,156 @@
+<?php
+/**
+ * The Header for our theme.
+ *
+ * Displays all of the <head> section and everything up till <div id="main">
+ *
+ * @package WordPress
+ * @subpackage WineGenius
+ * @since WineGenius 1.0
+ */
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;">
+<title><?php wp_title( '|', true, 'right' ); ?></title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="robots" content="index,follow" />
+<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.png" /> 
+<script> var imageDirPath='<?php echo get_template_directory_uri() ?>/images/'; </script>
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/selectivizr-min.js"></script>
+
+<![endif]-->
+
+<style type="text/css">
+.demobar{display:none;}
+#demo-side-bar{top:53px!important;left:90%!important;display:block!important;}
+.mac-container .main-menu a{font-size: 16px;}
+.mac-container .qq-upload-button{padding: 12px 30px 6px 24px;}
+.mac-container .recent-testingnotes ul li span .points, .mac-container .recent-testingnotes ul li span .pointsGreenBg, .mac-container .recent-testingnotes ul li span p{padding:6px 6px 2px 6px}
+.mac-container .ul li .button-sub-gradient {font-size: 15px;font-weight: bold;height: 29px;padding-top: 7px;}
+.mac-container .spilts-input-btn { padding: 5px 20px !important;float:right;margin:0px 21px 0px 0px;}
+</style>
+<?php wp_head(); ?>
+<script type="text/javascript">
+var baseurl = '<?php echo site_url(); ?>';
+var is_logged_in = <?php echo (int)is_user_logged_in() ?>;
+$(window).load(function(){
+	$('#demo-side-bar').removeAttr('style');
+});
+</script>
+<script type="text/javascript">
+$(function() {
+    $('input[name=\'siteSearchSubmit\']').click(function() {
+       location = '<?php echo get_permalink(34); ?>?SiteSearch[text]='+$('#aramakutusu').val();
+    })
+   
+   $('input[name=\'site_search\']').keypress(function (e) {   
+  if (e.which == 13) {
+    location = '<?php echo get_permalink(34); ?>?SiteSearch[text]='+$('#aramakutusu').val();
+  }
+});
+});
+
+</script>
+<script type="text/javascript">
+$(function() {  
+    $('input[name=\'HomeSiteSearchSubmit\']').click(function() {
+       location = '<?php echo get_permalink(34); ?>?SiteSearch[text]='+$('input[name=\'HomeSiteSearchText\']').val();
+    })
+   
+   $('input[name=\'HomeSiteSearchText\']').keypress(function (e) {   
+  if (e.which == 13) {
+    location = '<?php echo get_permalink(34); ?>?SiteSearch[text]='+$('input[name=\'HomeSiteSearchText\']').val();
+  }
+});
+});
+
+</script>
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/jquery.cookie.js"></script>
+</head>
+
+<?php if((strstr($_SERVER['HTTP_USER_AGENT'], 'iPhone') 
+        || strstr($_SERVER['HTTP_USER_AGENT'], 'iPod') 
+        || strstr($_SERVER['HTTP_USER_AGENT'], 'iPad') 
+        || strstr($_SERVER['HTTP_USER_AGENT'], 'macintosh') 
+        || strstr($_SERVER['HTTP_USER_AGENT'], 'Macintosh')) 
+        && strstr($_SERVER['HTTP_USER_AGENT'], 'Safari')){
+?>
+<body class="mac-container">
+<?php }
+else{?>
+<body <?php body_class(); ?>>
+<?php }?>
+ <div class="full-shadow">
+ <div class="container-outer" style="background:url(<?php echo get_template_directory_uri(); ?>/images/header-bg.jpg) repeat-x;"><!-- CONTAINER-OUTER -->
+   
+	<!-- Header -->
+	<header class="header_bg clearfix">
+		<div class="container clearfix">
+        
+        <div class="menu-links-top">
+        <ul class="header-my-ac-menu">
+        <li><a href="<?php echo get_permalink(168); ?>" onclick="jQuery.cookie('add_review_lnk', location.href); return true;"> <?php echo __('Add a Review'); ?></a></li>
+         <?php if(!is_user_logged_in()) { ?>
+         <li><a href="#login_popup" id="login"><?php echo __('Login', 'winegenius'); ?></a></li><li> <a id="register" href="<?php echo get_permalink(70); ?>"><?php echo __('Register', 'winegenius'); ?></a></li>
+         <?php }else { ?>
+         <li><a href="<?php echo get_permalink(133); ?>" id="my_account"><?php echo __('My Account', 'winegenius'); ?></a>
+         
+         <ul class=""><li><a href="<?php echo get_permalink(133); ?>/myprofile">My Profile</a></li>
+		 <li><a href="<?php echo get_permalink(133); ?>&edit">Edit Profile</a></li>
+		 <li><a href="<?php echo get_permalink(161); ?>">My Billing Information</a></li><li><a href="<?php echo get_permalink(163); ?>">My Content</a></li></ul>
+         
+         </li>
+         <li><a href="<?php echo wp_logout_url( site_url() ); ?>" id="logout"><?php echo __('Logout', 'winegenius'); ?></a></li>
+         <?php } ?>
+         
+         <li><a href="/contact_wine_genius">Contact Us</a></li> 
+         </ul>
+        </div>
+       <!--<a href="<?php /*?><?php echo get_permalink(168); ?><?php */?>"><div class="button"><?php /*?><?php echo __('ADD CONTENT'); ?><?php */?></div></a>-->
+        	<!-- Social -->
+            	<ul class="social-links">
+                	<li ><a href="<?php echo get_permalink(131); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/email-header.png" alt="Email"></a></li>
+                    <li ><a href="<?php echo kc_get_option( 'social', 'shareurls', 'facebook' ); ?>" onclick="window.open('<?php echo kc_get_option( 'social', 'shareurls', 'facebook' ); ?>'); return false;"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook-header.png" alt="Facebook"></a></li>
+                    <li ><a href="<?php echo kc_get_option( 'social', 'shareurls', 'twitter' ); ?>" onclick="window.open('<?php echo kc_get_option( 'social', 'shareurls', 'twitter' ); ?>'); return false;"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter-header.png" alt="Twitter"></a></li>
+                    <li ><a href="<?php echo kc_get_option( 'social', 'shareurls', 'linkedin' ); ?>" onclick="window.open('<?php echo kc_get_option( 'social', 'shareurls', 'linkedin' ); ?>'); return false;"><img src="<?php echo get_template_directory_uri(); ?>/images/linkedin-header.png"  alt="Linkedin"></a></li>
+                </ul>
+            <!-- /Social -->
+            
+             
+            
+			 <!-- Logo -->
+			<div class="logo">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/winegenius-logo.png" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"/></a>
+			</div>
+			 <!-- /Logo -->
+             <div style="float:right;width:50%;">
+             <div class="search-header" style="float:left;width:276px;margin-left:184px;">
+             <div id="arama-alani">
+
+		<input id="aramakutusu" name="site_search" type="text" placeholder="Site Search..." autocomplete="off">
+		<input id="ara" name="siteSearchSubmit" type="button" value="">
+</div>
+</div>
+			
+			<!-- Master Nav -->
+                        <?php echo get_primary_menu(); ?>
+ </div>
+			<!-- /Master Nav -->
+		</div>
+	</header>
+	<!-- /Header -->
+    </div><!-- END CONTAINER-OUTER -->
+	
+	<div class="clear"></div>
+        
+        <!-- Site search placeholder -->
+        <div id="ajaxsearch_div"></div>
